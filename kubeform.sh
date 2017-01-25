@@ -3,7 +3,7 @@ set -xeuo pipefail
 
 NODE_IP=$1
 KEYSDIR="${HOME}/keys"
-K8VERSION="v1.5.1_coreos.0"
+K8VERSION="v1.5.2_coreos.0"
 NODE_DNS=${2:-}
 
 echo "Enabling iptables"
@@ -126,7 +126,7 @@ done
 set -x
 
 echo "install kubectl"
-curl -s -O https://storage.googleapis.com/kubernetes-release/release/v1.5.1/bin/linux/amd64/kubectl
+curl -s -O https://storage.googleapis.com/kubernetes-release/release/v1.5.2/bin/linux/amd64/kubectl
 sudo mv kubectl /opt/bin
 sudo chmod +x /opt/bin/kubectl
 
