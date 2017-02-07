@@ -101,6 +101,7 @@ curl -s -X PUT -d "value={\"Network\":\"10.2.0.0/16\",\"Backend\":{\"Type\":\"vx
 echo "Creating basicauth file"
 MYPASS=$(openssl rand -hex 24)
 MYUSER=$(openssl rand -hex 12)
+
 sudo bash -c "echo ${MYPASS},${MYUSER},1 > /etc/kubernetes/ssl/apiserver/basicauth.pass"
 
 echo "starting kubernetes"
@@ -136,8 +137,11 @@ kubectl config set-credentials default-admin --certificate-authority=${KEYSDIR}/
 
 kubectl config set-context default-system --cluster=default-cluster --user=default-admin
 kubectl config use-context default-system
-kubectl create -f files/kube-dns.yml
-kubectl create -f files/kube-dashboard.yml
+
+sudo cp files/kube-dns.yml /etc/kubernetes/manifests/
+sudo cp files/kube-dashboard.yml /etc/kubernetes/manifests/
+kubectl create -f /etc/kubernetes/manifests/kube-dns.yml
+kubectl create -f /etc/kubernetes/manifests/kube-dashboard.yml
 kubectl get pods --all-namespaces
 set +x
 echo -e "\n=== Basic Auth Credentials ==="
