@@ -138,10 +138,8 @@ kubectl config set-credentials default-admin --certificate-authority=${KEYSDIR}/
 kubectl config set-context default-system --cluster=default-cluster --user=default-admin
 kubectl config use-context default-system
 
-sudo cp files/kube-dns.yml /etc/kubernetes/manifests/
-sudo cp files/kube-dashboard.yml /etc/kubernetes/manifests/
-kubectl create -f /etc/kubernetes/manifests/kube-dns.yml
-kubectl create -f /etc/kubernetes/manifests/kube-dashboard.yml
+kubectl create -f file/kube-dns.yml
+kubectl create -f file/kube-dashboard.yml
 kubectl get pods --all-namespaces
 set +x
 echo -e "\n=== Basic Auth Credentials ==="
